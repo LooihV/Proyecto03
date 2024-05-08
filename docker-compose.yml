@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    image: proyecto03
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+    networks:
+      - my_network
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - my_network
+volumes:
+  mongo_data:
+networks:
+  my_network:
